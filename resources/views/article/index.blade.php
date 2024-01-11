@@ -55,9 +55,8 @@
         </div>
 
     </section>
-
     <div class="pagination justify-content-center mt-5">
-        {!! $articles->links('article.customPagination') !!}
+        {!! $articles->appends(['categoryId' => $categoryId ?? null])->links('article.customPagination') !!}
     </div>
 
 

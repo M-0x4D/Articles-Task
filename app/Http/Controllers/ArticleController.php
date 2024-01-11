@@ -15,14 +15,17 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         try {
+
             if (!!$request->categoryId) {
                 $articles = Article::where('category_id', $request->categoryId)->latest()->paginate(5);
+                $categoryId = $request->categoryId;
             } else {
 
                 $articles = Article::latest()->paginate(5);
+                $categoryId = null; 
             }
             $categories = Category::latest()->get();
-            return view('article.index', compact(['articles', 'categories']));
+            return view('article.index', compact(['articles', 'categories', 'categoryId']));
         } catch (\Throwable $th) {
         }
     }
